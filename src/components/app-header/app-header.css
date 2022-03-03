@@ -1,0 +1,38 @@
+.app-header-block {
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+.app-header-item-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0px;
+}
+
+.app-header-item-list li {
+    list-style: none;
+}
+
+.app-header-item-list li a {
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0em;
+    text-align: left;
+    text-decoration: none;
+    color: black;
+}
+
+.app-header-item-list_main-logo {
+    font-size: 28px;
+    line-height: 33px;
+}
+
+.app-header-item-list li a span {
+    color: red;
+}
+
+.app-header-item-list_links a {
+    font-size: 24px;
+    line-height: 28px;
+}

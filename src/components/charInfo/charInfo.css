@@ -1,0 +1,64 @@
+.charinfo_block {
+    width: 35%;
+    box-shadow: 5px 5px 20px rgb(0 0 0 / 25%);
+    height: fit-content;
+    padding: 25px;
+}
+
+.cahrinfo_head {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+.charinfo_links {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 25px;
+}
+
+.charinfo_links div a .btn-red {
+    margin-bottom: 10px;
+}
+
+.charinfo_links p {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 26px;
+}
+
+.charinfo_block p {
+    margin-bottom: 10px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.charinfo_details h3 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 26px;
+    margin-bottom: 10px;
+}
+
+.charinfo_details p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 25px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.poster {
+    position: relative;
+}
+
+.poster img {
+    position: absolute;
+    top: 50px;
+    left: 100px;
+}
