@@ -1,56 +1,52 @@
-import './charList.css';
+import './charList.scss';
+import abyss from '../../resources/img/abyss.jpg';
 
-
-
-const CahrList = () => {
+const CharList = () => {
     return (
-        <div className="charlist_content">
-            <ul className="charlist_items">
-                <li className="charlist_card">
-                    <img src="./img/card.jpg" alt="char image"/>
-                    <div>Adam Warlock</div>
+        <div className="char__list">
+            <ul className="char__grid">
+                <li className="char__item">
+                    <img src={abyss} alt="abyss"/>
+                    <div className="char__name">Abyss</div>
                 </li>
-                <li className="charlist_card">
-                    <img src="./img/card.jpg" alt="char image"/>
-                    <div>Adam Warlock</div>
+                <li className="char__item char__item_selected">
+                    <img src={abyss} alt="abyss"/>
+                    <div className="char__name">Abyss</div>
                 </li>
-                <li className="charlist_card">
-                    <img src="./img/card.jpg" alt="char image"/>
-                    <div>Adam Warlock</div>
+                <li className="char__item">
+                    <img src={abyss} alt="abyss"/>
+                    <div className="char__name">Abyss</div>
                 </li>
-                <li className="charlist_card">
-                    <img src="./img/card.jpg" alt="char image"/>
-                    <div>Adam Warlock</div>
+                <li className="char__item">
+                    <img src={abyss} alt="abyss"/>
+                    <div className="char__name">Abyss</div>
                 </li>
-                <li className="charlist_card">
-                    <img src="./img/card.jpg" alt="char image"/>
-                    <div>Adam Warlock</div>
+                <li className="char__item">
+                    <img src={abyss} alt="abyss"/>
+                    <div className="char__name">Abyss</div>
                 </li>
-                <li className="charlist_card">
-                    <img src="./img/card.jpg" alt="char image"/>
-                    <div>Adam Warlock</div>
+                <li className="char__item">
+                    <img src={abyss} alt="abyss"/>
+                    <div className="char__name">Abyss</div>
                 </li>
-                <li className="charlist_card">
-                    <img src="./img/card.jpg" alt="char image"/>
-                    <div>Adam Warlock</div>
+                <li className="char__item">
+                    <img src={abyss} alt="abyss"/>
+                    <div className="char__name">Abyss</div>
                 </li>
-                <li className="charlist_card">
-                    <img src="./img/card.jpg" alt="char image"/>
-                    <div>Adam Warlock</div>
+                <li className="char__item">
+                    <img src={abyss} alt="abyss"/>
+                    <div className="char__name">Abyss</div>
                 </li>
-                <li className="charlist_card">
-                    <img src="./img/card.jpg" alt="char image"/>
-                    <div>Adam Warlock</div>
+                <li className="char__item">
+                    <img src={abyss} alt="abyss"/>
+                    <div className="char__name">Abyss</div>
                 </li>
             </ul>
-            <div className="charlist_btn">
-                <a href="#">
-                    <div className="btn-red">LOAD MORE</div>
-                </a>
-            </div>
-            
+            <button className="button button__main button__long">
+                <div className="inner">load more</div>
+            </button>
         </div>
     )
 }
 
-export default CahrList;
+export default CharList;

@@ -1,24 +1,24 @@
-import AppHeader from '../app-header/app-header';
-import RandomCharacter from '../random-character/random-character';
-import CahrList from '../charList/charList';
-import CharInfo from '../charInfo/charInfo';
+import AppHeader from "../appHeader/AppHeader";
+import RandomChar from "../randomChar/RandomChar";
+import CharList from "../charList/CharList";
+import CharInfo from "../charInfo/CharInfo";
 
+import decoration from '../../resources/img/vision.png';
 
-import './app.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <AppHeader/>
-      </header>
-      <RandomCharacter/>
-      <div className="char-list">
-        <CahrList/>
-        <CharInfo/>
-      </div>
-    </div>
-  );
+const App = () => {
+    return (
+        <div className="app">
+            <AppHeader/>
+            <main>
+                <RandomChar/>
+                <div className="char__content">
+                    <CharList/>
+                    <CharInfo/>
+                </div>
+                <img className="bg-decoration" src={decoration} alt="vision"/>
+            </main>
+        </div>
+    )
 }
 
 export default App;
