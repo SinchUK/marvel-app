@@ -6,7 +6,7 @@
     "node": "16.x"
   },
   
-  "homepage": "https://marvelapptest007.herokuapp.com/",
+  "homepage": "https://sinchuk.github.io/marvel-app/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
