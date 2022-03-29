@@ -7,7 +7,7 @@ import ImgObjFit from '../blocks/imgObjectFit';
 import './charList.scss';
 
 
-class CharList extends Component {
+class CharList extends React.Component {
 
     state = {
         charList: [],
