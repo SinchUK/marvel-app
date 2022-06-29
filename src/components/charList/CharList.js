@@ -5,7 +5,6 @@ import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import ImgObjFit from '../blocks/imgObjectFit';
 import './charList.scss';
-// import './charList.css';
 import propTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 

@@ -1,3 +1,4 @@
+import { CSSTransition } from "react-transition-group";
 import AppBanner from "../appBanner/AppBanner";
 import ComicsList from "../comicsList/ComicsList";
 

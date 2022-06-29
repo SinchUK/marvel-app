@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const ComicsList = () => {
 
@@ -41,13 +42,15 @@ const ComicsList = () => {
         const items = arr.map(( item, i ) => {
             const {title, thumbnail, price, id} = item;
             return (
-                <li key={i} className="comics__item">
-                    <Link to={`/comics/${id}`}>
-                        <img src={thumbnail} alt="ultimate war" className="comics__item-img"/>
-                        <div className="comics__item-name">{title}</div>
-                        <div className="comics__item-price">{price}</div>
-                    </Link>
-                </li>
+                <CSSTransition  in={true} key={id} timeout={300} classNames="comics__item">
+                    <li key={i} className="comics__item">
+                        <Link to={`/comics/${id}`}>
+                            <img src={thumbnail} alt="ultimate war" className="comics__item-img"/>
+                            <div className="comics__item-name">{title}</div>
+                            <div className="comics__item-price">{price}</div>
+                        </Link>
+                    </li>
+                </CSSTransition>
             )
         })
 
@@ -69,7 +72,10 @@ const ComicsList = () => {
                 {errorMessage}
                 {spinner}
             </div>
-            {items}
+            <TransitionGroup component={null}>
+                {items}
+            </TransitionGroup>
+            
             <button 
                 className="button button__main button__long"
                 style={{'display': comicsEnded ? 'none' : 'block'}}
