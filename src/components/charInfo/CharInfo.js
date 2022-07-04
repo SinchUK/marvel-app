@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './charInfo.scss';
+
 import useMarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Skeleton from '../skeleton/Skeleton';
 import ImgObjFit from '../blocks/imgObjectFit';
-import { Link } from 'react-router-dom';
+import CharSearch from '../search/CharSearch';
 
-
+import './charInfo.scss';
 
 const CharInfo = (props) => {
-    // console.log(props, "props char info");
-    // let location = useLocation();
-    // console.log(location, "location");
-    
-
+  
     const [char, setChar] = useState(null);
     const { loading, error, getCharacter, clearError } = useMarvelService();
 
@@ -38,25 +35,27 @@ const CharInfo = (props) => {
         setChar(char);
     }
 
-
-   
-
     const skeleton = char || loading || error ? null : <Skeleton/>; 
     const errorMessage = error ? <ErrorMessage/> : null;
     const spinner = loading ? <Spinner/> : null;
-    const content = !(loading || error  || !char) ? <View char={char}/> : null;
+    const content = !(loading || error  || !char) ? <View char={char} setPagePath={props.setPagePath}/> : null;
 
     return (
-        <div className="char__info">
-            {skeleton}
-            {errorMessage}
-            {spinner}
-            {content}        
+        <div>
+            <div className="char__info">
+                {skeleton}
+                {errorMessage}
+                {spinner}
+                {content}
+            </div>
+            <CharSearch setPagePath={props.setPagePath}/> 
         </div>
+        
     )
 }
 
-const View = ({char}) => {
+const View = ({ char }) => {
+    
 
     const {name, description, homepage, wiki, comics} = char;
     return (

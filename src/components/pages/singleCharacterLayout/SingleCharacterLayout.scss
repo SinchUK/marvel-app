@@ -1,0 +1,66 @@
+@import '../../../style/variables.scss';
+
+.single-char {
+    display: grid;
+    column-gap: 50px;
+    align-items: start;
+    margin-top: 50px;
+    grid-template-columns: 293px 550px auto;
+    &__img{
+        height: 293px;
+        width: 293px;
+        margin-right: 50px;
+        transform: translateX(-100%);
+        transition: transform 1s;
+        &-appear {
+            opacity:0;
+            transform: translatX(-200%);
+        }
+        &-appear-active {
+            opacity: 0;
+            transition: opacity 300ms;
+        }
+        &-appear-done {
+            opacity: 1;
+            transform: translateX(0%);
+            transition: all 300ms;
+        }
+    }
+    &__name {
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 29px;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+    }
+    &__descr {
+        font-family: 'Roboto Condensed';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+    }
+    &__back {
+        font-weight: bolder;
+        font-size: 18px;
+        line-height: 24px;
+        &:hover {
+            color: $main-color;
+        }
+    }
+    &__info {
+        &-appear {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        &-appear-active {
+            opacity: 0;
+            transition: opacity 300ms;
+        }
+        &-appear-done {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 300ms;
+        }
+    }
+}
