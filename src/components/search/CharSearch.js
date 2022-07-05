@@ -1,21 +1,49 @@
-import useMarvelService from '../../services/MarvelService';
-import { useState } from 'react';
-import { ErrorMessage as FormikErrorMEssage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { ErrorMessage as FormikErrorMEssage, Field, Form, Formik } from 'formik';
+
+import useMarvelService from '../../services/MarvelService';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './charSearch.scss';
 
 
 
+
+const setContent = (process, Component, char) => {
+    switch (process) {
+        case 'waiting':
+            return null
+            // eslint-disable-next-line
+            break;
+        case 'loading': 
+            return <div>Loading...</div>
+            // eslint-disable-next-line
+            break;
+        case 'confirmed': 
+            return char.length > 0 ? <Component/> : <div className='char__search-error'>The character was not found. Check the name and try again.</div>
+             // eslint-disable-next-line
+            break;
+        case 'error':
+            return <ErrorMessage/>
+             // eslint-disable-next-line
+            break;
+        default:
+            throw new Error('Unexpected process state');    
+    }
+}
+
+
 const CharSearch = () => {
-    const {error, loading, getCharacterByName} = useMarvelService();
+    const {process, setProcess, getCharacterByName,clearError} = useMarvelService();
     const [char, setChar] = useState(null);
 
     const updateChar = (name) => {
+        clearError();
         getCharacterByName(name)
-            .then(onCharLoaded);
+            .then(onCharLoaded)
+            .then(() => setProcess('confirmed'));
     }
 
     const onCharLoaded = (char) => {
@@ -37,8 +65,6 @@ const CharSearch = () => {
             </div>  
         )
     }
-    const errorMessage = error ? <div className='char__search-critical-error'><ErrorMessage/></div> : null;
-    const results = !char ? null : char.length > 0 ? <SearchSuccess/> : <div className='char__search-error'>The character was not found. Check the name and try again.</div>
 
     return (
         
@@ -71,7 +97,7 @@ const CharSearch = () => {
                         <button 
                             type="submit" 
                             className='button button__main'
-                            disabled={loading}>
+                            disabled={process === 'loading'}>
                             <div className="inner">
                                 FIND
                             </div>
@@ -80,8 +106,7 @@ const CharSearch = () => {
                     <FormikErrorMEssage component='div' className='char__search-error' name="charName"/>
                 </Form>
             </Formik>
-            {results}
-            {errorMessage}
+            {setContent(process, SearchSuccess, char)}
         </div>
     )
 }

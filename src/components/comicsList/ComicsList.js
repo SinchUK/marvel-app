@@ -1,28 +1,56 @@
 import './comicsList.scss';
 import useMarvelService from '../../services/MarvelService';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+
+const setContent = (process, Component, newItemLoading) => {
+    switch (process) {
+        case 'waiting':
+            return <Spinner/>
+            // eslint-disable-next-line
+            break;
+        case 'loading':
+            return newItemLoading ? <Component/> : <Spinner/>
+            // eslint-disable-next-line
+            break;
+        case 'confirmed': 
+            return <Component/>
+            // eslint-disable-next-line
+            break;
+        case 'error':
+            return <ErrorMessage/>
+            // eslint-disable-next-line
+            break;
+        default:
+            throw new Error('Unexpected process state');    
+    }
+}
+
+
 const ComicsList = () => {
 
     const [comicsList, setComicsList] = useState([]);
-    const [offset, setOffset ] = useState(1000);
+    const [offset, setOffset ] = useState(150);
     const [newItemLoading, setNewItemLoading] = useState(false);
     const [comicsEnded, setComicsEnded] = useState(false);
 
-    const {loading, error, getAllComics} = useMarvelService();
+    const {process, setProcess, getAllComics} = useMarvelService();
 
     useEffect(() => {
         onRequest(offset, true);
+        // eslint-disable-next-line
     },[])
 
     const onRequest = (offset, initial) => {
+        console.log("request");
         initial ? setNewItemLoading(false) : setNewItemLoading(true);
         getAllComics(offset)
-            .then(onComicsListLoaded);
+            .then(onComicsListLoaded)
+            .then(() => setProcess('confirmed'));
     }
 
     const  onComicsListLoaded = (newComicsList) => {
@@ -30,11 +58,10 @@ const ComicsList = () => {
         if (newComicsList.length < 8) {
             ended = true;
         }
-        setNewItemLoading(newItemLoading => false);
         setComicsList([...comicsList, ...newComicsList]); 
-
-        setOffset(offset => offset + 8);
-        setComicsEnded(comicsEnded => ended);
+        setNewItemLoading(false);
+        setOffset(offset + 8);
+        setComicsEnded(ended);
         // (newComicsList) => [...comicsList, ...newComicsList]
     }
 
@@ -42,15 +69,17 @@ const ComicsList = () => {
         const items = arr.map(( item, i ) => {
             const {title, thumbnail, price, id} = item;
             return (
-                <CSSTransition  in={true} key={id} timeout={300} classNames="comics__item">
-                    <li key={i} className="comics__item">
-                        <Link to={`/comics/${id}`}>
-                            <img src={thumbnail} alt="ultimate war" className="comics__item-img"/>
-                            <div className="comics__item-name">{title}</div>
-                            <div className="comics__item-price">{price}</div>
-                        </Link>
-                    </li>
-                </CSSTransition>
+                <TransitionGroup component={null}>
+                    <CSSTransition  in={true} key={i} timeout={300} classNames="comics__item">
+                        <li key={i} className="comics__item">
+                            <Link to={`/comics/${id}`}>
+                                <img src={thumbnail} alt="ultimate war" className="comics__item-img"/>
+                                <div className="comics__item-name">{title}</div>
+                                <div className="comics__item-price">{price}</div>
+                            </Link>
+                        </li>
+                    </CSSTransition>
+                </TransitionGroup>
             )
         })
 
@@ -61,20 +90,16 @@ const ComicsList = () => {
         )
     }
 
-    const items = renderItems(comicsList);
-
-    const spinner = loading && !newItemLoading ? <Spinner/> : null;
-    const errorMessage = error ? <ErrorMessage/> : null;
+    const elements = useMemo(() => {
+        return setContent(process, () => renderItems(comicsList), newItemLoading)
+        // eslint-disable-next-line
+    }, [process])
 
     return (
         <div className="comics__list">
-            <div className='comimcs__loading'>
-                {errorMessage}
-                {spinner}
-            </div>
-            <TransitionGroup component={null}>
-                {items}
-            </TransitionGroup>
+            {/* <TransitionGroup component={null}> */}
+                {elements}
+            {/* </TransitionGroup> */}
             
             <button 
                 className="button button__main button__long"

@@ -6,11 +6,8 @@ import { useState } from "react";
 import { Helmet } from 'react-helmet';
 
 import decoration from '../../resources/img/vision.png';
-import { useLocation } from "react-router-dom";
 
 const MainPage = () => {
-    let location = useLocation();
-    console.log(location, "location");
 
     const [selectedChar, setChar] = useState(null);
 

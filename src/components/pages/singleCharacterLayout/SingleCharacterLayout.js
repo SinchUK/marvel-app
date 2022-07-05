@@ -29,7 +29,7 @@ const SingleCharacterLayout = ({ data }) => {
                     <p className="single-char__descr">{description}</p>
                 </div>
             </CSSTransition>
-            <Link to="/" className="single-char__back">Back to all</Link>
+            <Link to="/" className="single-char__back">Back to Home Page</Link>
         </div>
     )
 }
